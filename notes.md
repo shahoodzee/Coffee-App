@@ -13,3 +13,5 @@ what we have added in babel.config.js and why we added it ?
 why are we adding plugins in babel.config.js ?
 
 Why did we named auth and tabs folder inside square brackets ?
+
+Why we are writing the query in tab brackets in search folder?
