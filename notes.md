@@ -14,4 +14,6 @@ why are we adding plugins in babel.config.js ?
 
 Why did we named auth and tabs folder inside square brackets ?
 
-Why we are writing the query in tab brackets in search folder?
+Why we are writing the query in tab brackets in search folder ?
+
+Why are we adding Screenoptions in tabs folder ? why are we setting tabBarShowLabel to false ?
