@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
-
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { icons } from "../constants";
 
 const FormField = ({
@@ -14,26 +13,27 @@ const FormField = ({
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <View className={`space-y-2 ${otherStyles}`}>
-      <Text className="text-base text-gray-100 font-pmedium">{title}</Text>
-
-      <View className="w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary flex flex-row items-center">
+    <View style={[styles.container, otherStyles]}>
+      <Text style={styles.title}>{title}</Text>
+      <View style={styles.inputContainer}>
         <TextInput
-          className="flex-1 text-white font-psemibold text-base"
+          style={styles.input}
           value={value}
           placeholder={placeholder}
-          placeholderTextColor="#7B7B8B"
           onChangeText={handleChangeText}
+          underlineColorAndroid={"transparent"}
           secureTextEntry={title === "Password" && !showPassword}
           {...props}
         />
-
         {title === "Password" && (
-          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <TouchableOpacity
+            onPress={() => setShowPassword(!showPassword)}
+            style={styles.eyeIconContainer}
+          >
             <Image
               source={!showPassword ? icons.eye : icons.eyeHide}
-              className="w-6 h-6"
               resizeMode="contain"
+              style={styles.eyeIcon}
             />
           </TouchableOpacity>
         )}
@@ -41,5 +41,42 @@ const FormField = ({
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 16,
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginBottom: 8,
+    color: "white",
+  },
+  inputContainer: {
+    alignItems: "center",
+    flexDirection: "row",
+    borderColor: "#2B2B2B",
+    backgroundColor: "#1B1B1B", // Optional: Add background color for the input container
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    fontSize: 16,
+    paddingHorizontal: 5,     // Add padding to prevent text from overlapping the eye icon
+    color: "white",
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: "#2B2B2B",
+    backgroundColor: "#1B1B1B", // Optional: Add background color for the input container
+  },
+  eyeIconContainer: {
+    position: "absolute",   // Position the eye icon absolutely within the container
+    right: 12,              // Adjust the position to align with the padding
+  },
+  eyeIcon: {
+    width: 24,
+    height: 24,
+  },
+});
 
 export default FormField;
