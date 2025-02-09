@@ -1,39 +1,70 @@
 import { useState } from "react";
-import { router, usePathname } from "expo-router";
-import { View, TouchableOpacity, Image, TextInput, Alert } from "react-native";
-
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { icons } from "../constants";
 
-const SearchInput = ({ initialQuery }) => {
-  const pathname = usePathname();
-  const [query, setQuery] = useState(initialQuery || "");
+const SearchInput = ({
+  title,
+  value,
+  placeholder,
+  handleChangeText,
+  otherStyles,
+  ...props
+}) => {
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <View className="flex flex-row items-center space-x-4 w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary">
+    <View style={{ paddingHorizontal: 20}}>
+      <View style={styles.inputContainer}>
       <TextInput
-        className="text-base mt-0.5 text-white flex-1 font-pregular"
-        value={query}
-        placeholder="Search a video topic"
-        placeholderTextColor="#CDCDE0"
-        onChangeText={(e) => setQuery(e)}
+        style={styles.input}
+        value={value}
+        placeholder={"Search items"}
+        onChangeText={handleChangeText}
+        underlineColorAndroid={"transparent"}
+        secureTextEntry={title === "Password" && !showPassword}
+        {...props}
       />
-
-      <TouchableOpacity
-        onPress={() => {
-          if (query === "")
-            return Alert.alert(
-              "Missing Query",
-              "Please input something to search results across database"
-            );
-
-          if (pathname.startsWith("/search")) router.setParams({ query });
-          else router.push(`/search/${query}`);
-        }}
-      >
-        <Image source={icons.search} className="w-5 h-5" resizeMode="contain" />
+      <TouchableOpacity style={styles.eyeIconContainer}>
+        <Image 
+          source={icons.search}
+          style={styles.eyeIcon}
+          resizeMode="contain"
+        />
       </TouchableOpacity>
+    </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  inputContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    borderColor: "#2B2B2B",
+    backgroundColor: "#1B1B1B",
+    position: "relative",
+    borderRadius: 8,
+    width: "100%",
+  },
+  input: {
+    flex: 1,
+    height: 40,
+    fontSize: 12,
+    marginTop: 0.5,
+    fontFamily: "Poppins-Regular",
+    color: "grey",
+    paddingLeft: 5,
+  },
+  eyeIconContainer: {
+    position: "absolute",
+    right: 12,
+    top: 10,
+  },
+  eyeIcon: {
+    width: 24,
+    height: 24,
+  },
+});
 
 export default SearchInput;

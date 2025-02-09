@@ -1,0 +1,3 @@
+this task.status should open a dropdown on click so user can change task.status 
+drop can show statuses like Opened, Closed etc.
+this task.status button should also have animation on hover so user can know its a clickable button 

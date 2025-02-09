@@ -7,6 +7,10 @@ import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 // import { useGlobalContext } from "../../context";
 
+// API Calls
+import { login } from "../../service/guestApi";
+
+
 const SignIn = () => {
   // const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
@@ -21,9 +25,10 @@ const SignIn = () => {
     }
 
     setSubmitting(true);
-
     try {
-      // await signIn(form.email, form.password);
+      debugger
+      const response = await login(form);
+      console.log(response);
       // const result = await getCurrentUser();
       // setUser(result);
       // setIsLogged(true);
@@ -31,9 +36,9 @@ const SignIn = () => {
       Alert.alert("Success", "User signed in successfully");
       router.replace("/home");
     } catch (error) {
-      //Alert.alert("Error", error.message);
+      Alert.alert("Error", error.message);
     } finally {
-      //setSubmitting(false);
+      setSubmitting(false);
     }
   };
 
