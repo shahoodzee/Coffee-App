@@ -26,7 +26,7 @@ const Home = () => {
   return (
     <SafeAreaView style={styles.HomeContainer}>
       <FlatList
-        data={[ {id:1}, {id:2}, {id:3}, {id:4}, {id:5}, {id:6}, {id:7}, {id:8} ]}
+        data={[{id:1}, {id:2}, {id:3}, {id:4}, {id:5}, {id:6}, {id:7}, {id:8}]}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <text style={{ fontSize: '3xl', color: 'white' }}>{item.id}</text>
@@ -69,20 +69,20 @@ const Home = () => {
                 Latest Videos
               </Text>
 
-              {/* <Trending posts={latestPosts ?? []} /> */}
+              <Trending posts={[{id:1}, {id:2}, {id:3}, {id:4}, {id:5}, {id:6}, {id:7}, {id:8}] }/>
             </View>
           
           </View>  
         )}
-      //   ListEmptyComponent={() => (
-      //     <EmptyState
-      //       title="No Videos Found"
-      //       subtitle="No videos created yet"
-      //     />
-      //   )}
-      //   refreshControl={
-      //     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      //   }
+        ListEmptyComponent={() => (
+          <EmptyState
+            title="No Videos Found"
+            subtitle="No videos created yet"
+          />
+        )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
        />
     </SafeAreaView>
   );
@@ -91,6 +91,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   HomeContainer: {
     backgroundColor: '#161622',
+    height: '100%',
   },
   ListHeaderContainer:{
     flex: 1,
@@ -114,10 +115,16 @@ const styles = StyleSheet.create({
     
   },
   LatestVideosContainer:{
-    flex: 1, paddingTop: 5, paddingBottom: 8 
+    flex: 1,
+    paddingHorizontal: 20,
+    marginBottom: 3,
+    marginTop: 6
   },
   LatestVideos:{ 
-    fontSize: 'lg', fontWeight: 'normal', color: 'white', marginBottom: 3
+    fontSize: 'lg',
+    fontWeight: 'normal',
+    fontFamily: 'Poppins-Regular',
+    color: '#6B7280'
   }
 });
 

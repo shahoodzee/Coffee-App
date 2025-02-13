@@ -1,30 +1,57 @@
 import { router } from "expo-router";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 
 import { images } from "../constants";
 import CustomButton from "./CustomButton";
 
 const EmptyState = ({ title, subtitle }) => {
   return (
-    <View className="flex justify-center items-center px-4">
+    <View style={styles.container}>
       <Image
         source={images.empty}
         resizeMode="contain"
-        className="w-[270px] h-[216px]"
+        style={styles.image}
       />
 
-      <Text className="text-sm font-pmedium text-gray-100">{title}</Text>
-      <Text className="text-xl text-center font-psemibold text-white mt-2">
-        {subtitle}
-      </Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.subtitle}>{subtitle}</Text>
 
       <CustomButton
         title="Back to Explore"
         handlePress={() => router.push("/home")}
-        containerStyles="w-full my-5"
+        containerStyles={styles.button}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 16,
+  },
+  image: {
+    width: 270,
+    height: 216,
+  },
+  title: {
+    fontSize: 14,
+    fontFamily: "Poppins-Medium",
+    color: "#D1D5DB",
+  },
+  subtitle: {
+    fontSize: 18,
+    textAlign: "center",
+    fontFamily: "Poppins-SemiBold",
+    color: "#FFFFFF",
+    marginTop: 8,
+  },
+  button: {
+    width: "100%",
+    marginVertical: 20,
+  },
+});
 
 export default EmptyState;
