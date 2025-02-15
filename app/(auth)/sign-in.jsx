@@ -2,13 +2,19 @@ import { useState } from "react";
 import { Link, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text, ScrollView, Dimensions, Alert, Image, StyleSheet } from "react-native";
+
+// Constants
 import { images } from '../../constants';
+
+// Components
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
+
+// Context
 // import { useGlobalContext } from "../../context";
 
 // API Calls
-import { login } from "../../service/guestApi";
+import { login, fetchUser } from "../../service/api";
 
 
 const SignIn = () => {
@@ -21,20 +27,22 @@ const SignIn = () => {
 
   const submit = async () => {
     if (form.email === "" || form.password === "") {
+      alert("Please fill in all fields");
       Alert.alert("Error", "Please fill in all fields");
     }
-
+    
     setSubmitting(true);
+    debugger
     try {
-      debugger
       const response = await login(form);
-      console.log(response);
-      // const result = await getCurrentUser();
-      // setUser(result);
-      // setIsLogged(true);
-
-      Alert.alert("Success", "User signed in successfully");
-      router.replace("/home");
+      if (response.success === true) {
+        document.cookie = `token=${response.data}; path=/; max-age=86400`;
+        const result = await fetchUser();
+        setUser(result);
+        setIsLogged(true);
+        Alert.alert("Success", "User signed in successfully");
+        router.replace("/home");
+      }
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {

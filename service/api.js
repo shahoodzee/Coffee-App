@@ -1,13 +1,13 @@
 import { BASE_URL } from './apiUrls.js';
 import request from './request.js';
 
-// export const login = (requestObj) => {
-//     return request({
-//         url: `${BASE_URL}/User/signIn`,
-//         method: 'POST',
-//         data: requestObj
-//     });
-// };
+export const login = (requestObj) => {
+    return request({
+        url: `${BASE_URL}/User/signIn`,
+        method: 'POST',
+        data: requestObj
+    });
+};
 
 export const logout = () => {
     return request({
@@ -98,7 +98,7 @@ export const fetchRecentComments = () => {
 
 export const fetchUser = () => {
     return request({
-        url:    `${BASE_URL}/User/getUser`,
+        url:  `${BASE_URL}/User/getUser`,
         method: 'GET'
     });
 };
