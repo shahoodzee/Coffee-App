@@ -11,14 +11,14 @@ import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 
 // Context
-// import { useGlobalContext } from "../../context";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 // API Calls
 import { login, fetchUser } from "../../service/api";
 
 
 const SignIn = () => {
-  // const { setUser, setIsLogged } = useGlobalContext();
+  const { setUser, setIsLogged } = useGlobalContext();
   const [isSubmitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({
     email: "",
@@ -32,16 +32,15 @@ const SignIn = () => {
     }
     
     setSubmitting(true);
-    debugger
     try {
       const response = await login(form);
       if (response.success === true) {
         document.cookie = `token=${response.data}; path=/; max-age=86400`;
         const result = await fetchUser();
-        setUser(result);
+        setUser(result.data);
         setIsLogged(true);
         Alert.alert("Success", "User signed in successfully");
-        router.replace("/home");
+        router.navigate('/home');
       }
     } catch (error) {
       Alert.alert("Error", error.message);

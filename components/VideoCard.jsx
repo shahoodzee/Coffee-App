@@ -1,79 +1,153 @@
-// import { useState } from "react";
-// import { ResizeMode, Video } from "expo-av";
-// import { View, Text, TouchableOpacity, Image } from "react-native";
+import { useState } from "react";
+import { ResizeMode, Video } from "expo-av";
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 
-// import { icons } from "../constants";
+import { icons } from "../constants";
 
-// const VideoCard = ({ title, creator, avatar, thumbnail, video }) => {
-//   const [play, setPlay] = useState(false);
+export const VideoCard = ({ title, creator, avatar, thumbnail, video }) => {
+  const [play, setPlay] = useState(false);
 
-//   return (
-//     <View className="flex flex-col items-center px-4 mb-14">
-//       <View className="flex flex-row gap-3 items-start">
-//         <View className="flex justify-center items-center flex-row flex-1">
-//           <View className="w-[46px] h-[46px] rounded-lg border border-secondary flex justify-center items-center p-0.5">
-//             <Image
-//               source={{ uri: avatar }}
-//               className="w-full h-full rounded-lg"
-//               resizeMode="cover"
-//             />
-//           </View>
+  return (
+    <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        <View style={styles.creatorContainer}>
+          <View style={styles.avatarContainer}>
+            <Image
+              source={{ uri: avatar }}
+              style={styles.avatarImage}
+              resizeMode="cover"
+            />
+          </View>
 
-//           <View className="flex justify-center flex-1 ml-3 gap-y-1">
-//             <Text
-//               className="font-psemibold text-sm text-white"
-//               numberOfLines={1}
-//             >
-//               {title}
-//             </Text>
-//             <Text
-//               className="text-xs text-gray-100 font-pregular"
-//               numberOfLines={1}
-//             >
-//               {creator}
-//             </Text>
-//           </View>
-//         </View>
+          <View style={styles.infoContainer}>
+            <Text style={styles.titleText} numberOfLines={1}>
+              {title}
+            </Text>
+            <Text style={styles.creatorText} numberOfLines={1}>
+              {creator}
+            </Text>
+          </View>
 
-//         <View className="pt-2">
-//           <Image source={icons.menu} className="w-5 h-5" resizeMode="contain" />
-//         </View>
-//       </View>
+        </View>
 
-//       {play ? (
-//         <Video
-//           source={{ uri: video }}
-//           className="w-full h-60 rounded-xl mt-3"
-//           resizeMode={ResizeMode.CONTAIN}
-//           useNativeControls
-//           shouldPlay
-//           onPlaybackStatusUpdate={(status) => {
-//             if (status.didJustFinish) {
-//               setPlay(false);
-//             }
-//           }}
-//         />
-//       ) : (
-//         <TouchableOpacity
-//           activeOpacity={0.7}
-//           onPress={() => setPlay(true)}
-//           className="w-full h-60 rounded-xl mt-3 relative flex justify-center items-center"
-//         >
-//           <Image
-//             source={{ uri: thumbnail }}
-//             className="w-full h-full rounded-xl mt-3"
-//             resizeMode="cover"
-//           />
+        <View style={styles.menuContainer}>
+          <Image source={icons.menu} style={styles.menuIcon} resizeMode="contain" />
+        </View>
+      </View>
 
-//           <Image
-//             source={icons.play}
-//             className="w-12 h-12 absolute"
-//             resizeMode="contain"
-//           />
-//         </TouchableOpacity>
-//       )}
-//     </View>
-//   );
-// };
+      {play ? (
+        <Video
+          source={{ uri: video }}
+          style={styles.videoPlayer}
+          resizeMode={ResizeMode.CONTAIN}
+          useNativeControls
+          shouldPlay
+          onPlaybackStatusUpdate={(status) => {
+            if (status.didJustFinish) {
+              setPlay(false);
+            }
+          }}
+        />
+      ) : (
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => setPlay(true)}
+          style={styles.thumbnailContainer}
+        >
+          <Image
+            source={{ uri: thumbnail }}
+            style={styles.thumbnailImage}
+            resizeMode="cover"
+          />
+          <Image
+            source={icons.play}
+            style={styles.playIcon}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      )}
+    </View>
+  );
+};
 
-// export default VideoCard;
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 16,
+    marginBottom: 56,
+    alignItems: 'center',
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    gap: 100,
+    alignItems: 'space-between',
+  },
+  creatorContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  avatarContainer: {
+    width: 46,
+    height: 46,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#3B3B3B', // secondary color
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 2,
+  },
+  avatarImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
+  },
+  infoContainer: {
+    flex: 1,
+    marginLeft: 12,
+    justifyContent: 'center',
+    gap: 4,
+  },
+  titleText: {
+    fontSize: 14,
+    fontFamily: 'PSemiBold',
+    color: '#FFFFFF',
+  },
+  creatorText: {
+    fontSize: 12,
+    fontFamily: 'PRegular',
+    color: '#F1F1F1',
+  },
+  menuContainer: {
+    paddingTop: 8,
+  },
+  menuIcon: {
+    width: 20,
+    height: 20,
+  },
+  videoPlayer: {
+    width: '100%',
+    height: 240,
+    borderRadius: 12,
+    marginTop: 12,
+  },
+  thumbnailContainer: {
+    width: '100%',
+    height: 240,
+    borderRadius: 12,
+    marginTop: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  thumbnailImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 12,
+    position: 'absolute',
+  },
+  playIcon: {
+    width: 48,
+    height: 48,
+  },
+});
+
+export default VideoCard;

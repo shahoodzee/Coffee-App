@@ -28,7 +28,7 @@ axios.interceptors.response.use(responseInterceptor, (error) => {
   try{
     if(error.response.status === 401){
       console.log("Unauthorized! you will need to log in again.");
-      window.location.replace('/logout');
+      window.location.replace('/sign-in');
       console.table(error);
       return Promise.reject(error.response.data);
     }

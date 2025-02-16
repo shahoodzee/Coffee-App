@@ -7,7 +7,13 @@ import { ScrollView } from 'react-native-gesture-handler'
 import { images } from '../constants';
 import { CustomButton } from '../components';
 
+// Context
+import { useGlobalContext } from "../context/GlobalProvider";
+
 const index = () => {
+  const { loading, isLogged } = useGlobalContext();
+  if (!loading && isLogged) return <Redirect href="/home" />;
+  
   return (
     <>
       <SafeAreaView style={styles.SafeAreaView}>
