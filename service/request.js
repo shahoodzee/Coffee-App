@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Alert } from 'react-native';
 
 const requestInterceptor = (config) => {
   // Add your custom logic here
@@ -27,10 +28,11 @@ axios.interceptors.response.use(responseInterceptor, (error) => {
   console.error("Network Error:", error); // Log the network error
   try{
     if(error.response.status === 401){
-      console.log("Unauthorized! you will need to log in again.");
-      window.location.replace('/sign-in');
+      // console.log("Unauthorized! you will need to log in again.");
+      // Alert.alert("Error", "Unauthorized! you will need to log in again.");
+      // window.location.replace('/sign-in');
       console.table(error);
-      return Promise.reject(error.response.data);
+      // return Promise.reject(error.response.data);
     }
     else{
       return Promise.reject(error.response.data);

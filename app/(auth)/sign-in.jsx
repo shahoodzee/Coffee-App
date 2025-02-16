@@ -30,7 +30,6 @@ const SignIn = () => {
       alert("Please fill in all fields");
       Alert.alert("Error", "Please fill in all fields");
     }
-    
     setSubmitting(true);
     try {
       const response = await login(form);

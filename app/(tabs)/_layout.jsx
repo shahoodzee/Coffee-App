@@ -1,7 +1,15 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 import {Tabs, Redirect} from 'expo-router';
+
+//Components
+import { Loader } from "../../components";
+
+// Icons
 import { icons } from '../../constants';
+
+// Context
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const TabIcon = ({ color, focused, icon, name }) => {
   return (
@@ -24,6 +32,9 @@ const TabIcon = ({ color, focused, icon, name }) => {
 }
 
 const TabsLayout = () => {
+  const { loading, isLogged } = useGlobalContext();
+  if (!loading && !isLogged) return <Redirect href="/sign-in" />;
+
   return (
     <>
       <Tabs
@@ -70,13 +81,13 @@ const TabsLayout = () => {
           }}/>
 
         <Tabs.Screen 
-          name="create"
+          name="cart"
           options={{  
-            title: 'Create', 
+            title: 'Cart', 
             headerShown: false,
             tabBarIcon: ({ color , focused }) => (
               <TabIcon
-                icon={icons.plus}
+                icon={icons.shoppingCart}
                 focused = {focused}
                 color = {color}
                 name = "create"

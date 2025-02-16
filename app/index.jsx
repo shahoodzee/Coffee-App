@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, Redirect } from 'react-native'
 import React from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { Link, router } from 'expo-router'
@@ -11,8 +11,8 @@ import { CustomButton } from '../components';
 import { useGlobalContext } from "../context/GlobalProvider";
 
 const index = () => {
-  const { loading, isLogged } = useGlobalContext();
-  if (!loading && isLogged) return <Redirect href="/home" />;
+  // const { loading, isLogged } = useGlobalContext();
+  // if (!loading && isLogged) return <Redirect href="/home" />;
   
   return (
     <>
@@ -32,8 +32,8 @@ const index = () => {
             />
 
             <Text style={styles.welcomeText}>
-              Discover Endless
-              Possibilities with  
+              Explore the Perfect
+              Blend of Flavors
               <Text style={styles.secondaryText}> Aora</Text>
             </Text>
 
@@ -44,8 +44,7 @@ const index = () => {
             />
 
             <Text className=" font-pregular text-gray-100 mt-7 text-center" style={styles.WelcomeText}>
-              Where Creativity Meets Innovation: Embark on a Journey of Limitless
-              Exploration with Aora
+              "Coffee is the common man's gold, and like gold, it brings to every person the feeling of luxury and nobility."
             </Text>
 
             <CustomButton
