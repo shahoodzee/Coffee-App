@@ -66,16 +66,16 @@ const TabsLayout = () => {
           }}/>
 
         <Tabs.Screen 
-          name="bookmark"
+          name="favorites"
           options={{  
-            title: 'Bookmark', 
+            title: 'Favorites', 
             headerShown: false,
             tabBarIcon: ({ color , focused }) => (
               <TabIcon
                 icon={icons.bookmark}
                 focused = {focused}
                 color = {color}
-                name = "bookmark"
+                name = "favorites"
               />
             ) 
           }}/>
@@ -90,7 +90,7 @@ const TabsLayout = () => {
                 icon={icons.shoppingCart}
                 focused = {focused}
                 color = {color}
-                name = "create"
+                name = "cart"
               />
             ) 
           }}/>

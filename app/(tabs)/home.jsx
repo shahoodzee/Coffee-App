@@ -6,6 +6,9 @@ import { images } from "../../constants";
 // Compoenets
 import { EmptyState, SearchInput, Trending, VideoCard } from "../../components";
 
+// Context
+import { useGlobalContext } from "../../context/GlobalProvider";
+
 // Static Data
 
 const VideoCardData = [
@@ -95,6 +98,7 @@ const VideoCardData = [
 const Home = () => {
   // const { data: posts, refetch } = useAppwrite(getAllPosts);
   // const { data: latestPosts } = useAppwrite(getLatestPosts);
+  const { user } = useGlobalContext();
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -132,7 +136,7 @@ const Home = () => {
                   Welcome Back
                 </Text>
                 <Text style={styles.ClientName}>
-                  User
+                  {user.fullName}
                 </Text>
               </View>
 
@@ -154,7 +158,7 @@ const Home = () => {
                 Latest Videos
               </Text>
 
-              <Trending posts={[{id:1}, {id:2}, {id:3}, {id:4}, {id:5}, {id:6}, {id:7}, {id:8}] }/>
+              <Trending posts={VideoCardData}/>
             </View>
           
           </View>  

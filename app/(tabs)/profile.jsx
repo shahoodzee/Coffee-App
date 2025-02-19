@@ -158,13 +158,13 @@ const Profile = () => {
             <View style={styles.postsRow}>
               <InfoBox
                 title={posts.length || 0}
-                subtitle="Posts"
+                subtitle="Favuorites"
                 titleStyles={styles.infoBoxTitle}
                 containerStyles={styles.postInfoBox}
               />
               <InfoBox
-                title="1.2k"
-                subtitle="Followers"
+                title="12"
+                subtitle="Orders"
                 titleStyles={styles.infoBoxTitle}
               />
             </View>
@@ -189,8 +189,7 @@ const styles = StyleSheet.create({ // Add this styles object
     paddingHorizontal: 16,
   },
   logoutButton: {
-    flex: 1,
-    alignItems: 'flex-end',
+    alignSelf: 'flex-end',
     marginBottom: 40,
   },
   avatarContainer: {
